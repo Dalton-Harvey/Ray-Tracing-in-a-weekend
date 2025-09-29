@@ -6,8 +6,8 @@ uniform vec2 screen_size;
 uniform float aspect_ratio;
 uniform float viewport_width;
 uniform float viewport_height;
-uniform float pixel_delta_u;
-uniform float pixel_delta_v;
+uniform vec3 pixel_delta_u;
+uniform vec3 pixel_delta_v;
 uniform vec3 viewport_upper_left;
 uniform vec3 pixel00_loc;
 
@@ -38,7 +38,3 @@ void fragment() {
 
 }
 
-//void light() {
-//	// Called for every pixel for every light affecting the material.
-//	// Uncomment to replace the default light processing function with this one.
-//}
