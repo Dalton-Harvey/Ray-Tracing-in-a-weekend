@@ -3,7 +3,6 @@ extends Node3D
 @export var quad: MeshInstance3D
 @export var camera: Camera3D
 @export var focal_length = 1;
-@export var viewport_height = 2;
 var mat = ShaderMaterial
 var spheres: Array[SphereData] = []
 var dynamic = false
@@ -31,8 +30,9 @@ func _update_scene_uniforms():
 
 func _init_viewport_dimensions():
 	var screen_size = get_viewport().size
-	var aspect_ratio = screen_size.x / screen_size.y
+	var aspect_ratio = float(screen_size.x) / float(screen_size.y)
 
+	var viewport_height = 2.0 * focal_length * tan(deg_to_rad($Camera3D.fov) / 2.0)
 	var viewport_width = viewport_height * aspect_ratio
 
 	var viewport_u = Vector3(viewport_width,0,0)

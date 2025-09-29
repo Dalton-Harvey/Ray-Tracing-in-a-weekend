@@ -18,7 +18,7 @@ struct Ray {
 
 vec3 ray_color(Ray ray){
     vec3 unit_dir = normalize(ray.dir);
-    float a = (unit_dir.y + 1.0) / 2.0;
+    float a = (unit_dir.y + 1.0) * 0.5;
     return mix(vec3(1.0,1.0,1.0), vec3(0.5,0.7,1.0), a);
 }
 
@@ -26,7 +26,7 @@ void fragment() {
     vec2 pixel_coords = SCREEN_UV * screen_size;
     vec2 pixel_index = floor(pixel_coords);
 
-    vec3 pixel_center = pixel00_loc + (SCREEN_UV.x * screen_size.x + 0.5) * pixel_delta_u + (SCREEN_UV.y * screen_size.y + 0.5) * pixel_delta_v;
+    vec3 pixel_center = pixel00_loc + (pixel_index.x * pixel_delta_u) + (pixel_index.y * pixel_delta_v);
 
     vec3 ray_direction = pixel_center - cam_origin;
 
@@ -35,7 +35,6 @@ void fragment() {
     ray.dir = ray_direction;
 
     ALBEDO = ray_color(ray);
-
 
 }
 
