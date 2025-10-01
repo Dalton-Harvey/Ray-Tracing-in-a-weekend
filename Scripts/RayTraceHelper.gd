@@ -5,6 +5,10 @@ extends Node3D
 @export var focal_length = 1;
 var mat = ShaderMaterial
 var spheres: Array[SphereData] = []
+var sphere_centers: Array[Vector3] = []
+var sphere_radii: Array[float] = []
+var sphere_colors: Array[Color] = []
+var sphere_count = 0
 var dynamic = false
 
 func _ready():
@@ -19,14 +23,19 @@ func _process(_delta):
 
 func _init_scene_uniforms():
 	for object in get_tree().get_nodes_in_group("Scene_Objects"):
-		var curr = SphereData.new()
-		curr.center = object.global_transform.origin
-		curr.radius = object.scale.x * 0.5
-		spheres.append(curr)
-	pass
-
+		sphere_centers.append(object.global_transform.origin)
+		sphere_radii.append(object.radius)
+		sphere_colors.append(object.color)
+		sphere_count += 1
+	
+	mat.set_shader_parameter("sphere_count", spheres.size())
+	for x in range(sphere_count):
+		mat.set_shader_parameter("sphere_centers", sphere_centers)
+		mat.set_shader_parameter("sphere_radii", sphere_radii)
+		mat.set_shader_parameter("sphere_colors", sphere_colors)
+	
 func _update_scene_uniforms():
-	mat.set_shader_parameter("cam_origin", camera.global_transform.origin)
+	pass
 
 func _init_viewport_dimensions():
 	var screen_size = get_viewport().size

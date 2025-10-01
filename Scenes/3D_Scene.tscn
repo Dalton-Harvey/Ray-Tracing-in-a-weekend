@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://vyib47h74hfq"]
+[gd_scene load_steps=8 format=3 uid="uid://vyib47h74hfq"]
 
 [ext_resource type="Script" uid="uid://deh45hri2x3ko" path="res://Scripts/RayTraceHelper.gd" id="1_ra7em"]
 [ext_resource type="Script" uid="uid://y20f6spyiotf" path="res://Scripts/CameraHelper.gd" id="1_rp6ar"]
 [ext_resource type="Shader" uid="uid://b0go8i2ypoo3x" path="res://Shaders/RayTracing.gdshader" id="2_pt1tj"]
+[ext_resource type="Script" uid="uid://qvodu56317te" path="res://Scripts/SphereHelper.gd" id="4_0j0y6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ra7em"]
 render_priority = 0
@@ -12,10 +13,17 @@ shader_parameter/screen_size = Vector2(0, 0)
 shader_parameter/aspect_ratio = 0.0
 shader_parameter/viewport_width = 0.0
 shader_parameter/viewport_height = 0.0
-shader_parameter/pixel_delta_u = 0.0
-shader_parameter/pixel_delta_v = 0.0
+shader_parameter/pixel_delta_u = Vector3(0, 0, 0)
+shader_parameter/pixel_delta_v = Vector3(0, 0, 0)
 shader_parameter/viewport_upper_left = Vector3(0, 0, 0)
 shader_parameter/pixel00_loc = Vector3(0, 0, 0)
+shader_parameter/sphere_count = 0
+shader_parameter/sphere_centers = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/sphere_radii = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/sphere_colors = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/main_center = Vector3(0, 0, 0)
+shader_parameter/main_radius = 0.0
+shader_parameter/main_color = Vector3(0, 0, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_pt1tj"]
 material = SubResource("ShaderMaterial_ra7em")
@@ -37,3 +45,4 @@ mesh = SubResource("QuadMesh_pt1tj")
 [node name="RayTraceSphere" type="MeshInstance3D" parent="." groups=["Scene_Objects"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 mesh = SubResource("SphereMesh_rp6ar")
+script = ExtResource("4_0j0y6")
